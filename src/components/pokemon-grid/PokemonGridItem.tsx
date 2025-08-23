@@ -1,28 +1,23 @@
 import Image from "next/image";
 import { PokemonType } from "./PokemonType";
 import Link from "next/link";
+import { SimplePokemon } from "@/interfaces";
 
-const typesExample = [  //! BORRAR
-  {
-    "slot": 1,
-    "type": {
-      "name": "fire",
-      "url": "https://pokeapi.co/api/v2/type/10/"
-    }
-  },
-];
+interface Props {
+  pokemon: SimplePokemon;
+}
 
 
-export const PokemonGridItem = () => {
-  const newName = ("charmander").charAt(0).toUpperCase() + ("charmander").slice(1);
+export const PokemonGridItem = ({ pokemon }: Props) => {
+  const newName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
   return (
     <Link
       href="/pokemon/4"
-      className="flex flex-col items-center gap-4 w-full bg-white dark:bg-[#2C2C2E] shadow-md dark:shadow-sm p-5 rounded-md border-2 border-[#E5E7EB] dark:border-[#3F3F46] hover:border-[#2563EB]"
+      className="flex flex-col items-center gap-4 w-full max-w-xs bg-white dark:bg-[#2C2C2E] shadow-md dark:shadow-sm p-5 rounded-md border-2 border-[#E5E7EB] dark:border-[#3F3F46] hover:border-[#2563EB]"
     >
       <Image
-        src="/example.png"
+        src={ pokemon.sprite }
         alt="example image"
         width={ 96 }
         height={ 96 }
@@ -31,14 +26,14 @@ export const PokemonGridItem = () => {
       />
 
       <div className="text-center">
-        <p className="text-current/50">#{ 4 }</p>
+        <p className="text-current/50">#{ pokemon.id }</p>
         <p className="font-bold text-2xl">{ newName }</p>
       </div>
 
       <div className="flex justify-center items-center gap-2 flex-wrap">{/* Types */}
         {
-          typesExample.map(typeExample => (
-            <PokemonType key={ typeExample.slot } pokemonType={ typeExample.type.name } />
+          pokemon.types.map((type) => (
+            <PokemonType key={ `${ pokemon.id }-${ type }` } pokemonType={ type } />
           ))
         }
       </div>

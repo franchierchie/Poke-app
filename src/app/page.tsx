@@ -2,8 +2,11 @@ import Image from "next/image";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { PokemonGrid } from "@/components";
+import { getPokemons } from "@/actions/getPokemons";
 
-export default function Home() {
+export default async function Home() {
+  const pokemons = await getPokemons( 151 );
+
   return (
     <div>
       {/* searhBar */}
@@ -22,7 +25,7 @@ export default function Home() {
         </button>
       </label>
 
-      <PokemonGrid />
+      <PokemonGrid pokemons={ pokemons } />
     </div>
   );
 }
