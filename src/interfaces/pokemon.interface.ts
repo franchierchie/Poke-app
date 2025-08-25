@@ -7,14 +7,14 @@ export interface SimplePokemon {
 }
 
 export interface PokemonTypes {
-  slot: string;
+  slot: number;
   type: {
     name: string;
     url: string;
   };
 }
 
-export interface ComplexPokemon {
+export interface SinglePokemon {
   abilities:                Ability[];
   base_experience:          number;
   cries:                    Cries;
@@ -198,3 +198,5 @@ export interface Type {
   slot: number;
   type: Species;
 }
+
+export type StatName = 'hp' | 'attack' | 'defense' | 'special-attack' | 'special-defense' | 'speed';

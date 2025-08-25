@@ -2,7 +2,7 @@ import Image from "next/image";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { PokemonGrid } from "@/components";
-import { getPokemons } from "@/actions/getPokemons";
+import { getPokemons } from "@/actions";
 
 export default async function Home() {
   const pokemons = await getPokemons( 151 );

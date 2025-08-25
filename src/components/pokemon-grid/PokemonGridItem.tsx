@@ -13,7 +13,7 @@ export const PokemonGridItem = ({ pokemon }: Props) => {
 
   return (
     <Link
-      href="/pokemon/4"
+      href={`/pokemon/${ pokemon.id }`}
       className="flex flex-col items-center gap-4 w-full max-w-xs bg-white dark:bg-[#2C2C2E] shadow-md dark:shadow-sm p-5 rounded-md border-2 border-[#E5E7EB] dark:border-[#3F3F46] hover:border-[#2563EB]"
     >
       <Image
