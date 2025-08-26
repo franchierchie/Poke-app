@@ -1,14 +1,16 @@
 'use server';
 
-import { Ability, EffectEntry } from "@/interfaces";
+import { Ability, AbilityWithEffect, EffectEntry } from "@/interfaces";
 
-export const getPokemonAbilities = async( abilities: Ability[] ) => {
+// fetches the abilities and adds the effect in each one
+export const getPokemonAbilities = async( abilities: Ability[] ): Promise<AbilityWithEffect[]> => {
   try {
     const resp = await Promise.all(
       abilities.map( async(ab) => {
+        // fetch the full ability
         const data = await fetch(ab.ability!.url).then(res => res.json());
 
-        // get effects
+        // get the effects
         const effectEntry = data.effect_entries.find(
           (entry: EffectEntry) => entry.language.name === 'en'
         );

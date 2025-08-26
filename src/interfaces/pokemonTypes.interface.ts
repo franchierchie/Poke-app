@@ -1,3 +1,5 @@
+import { GameIndex, Generation, Name } from "./";
+
 export interface SimplePokemonTypes {
   damage_relations:      DamageRelations;
   game_indices:          GameIndex[];
@@ -17,23 +19,8 @@ export interface DamageRelations {
   double_damage_to:   Generation[];
   half_damage_from:   Generation[];
   half_damage_to:     Generation[];
-  no_damage_from:     any[];
+  no_damage_from:     Generation[];
   no_damage_to:       any[];
-}
-
-interface Generation {
-  name: string;
-  url:  string;
-}
-
-interface GameIndex {
-  game_index: number;
-  generation: Generation;
-}
-
-interface Name {
-  language: Generation;
-  name:     string;
 }
 
 interface PastDamageRelation {

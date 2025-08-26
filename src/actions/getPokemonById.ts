@@ -1,9 +1,9 @@
 'use server';
 
-import { PokemonTypes, SinglePokemon } from "@/interfaces";
+import { PokemonDetails, PokemonTypes, SinglePokemon } from "@/interfaces";
 import { getPokemonAbilities, getPokemonTypeMatchups } from "./";
 
-export const getPokemonById = async( id: number ) => {
+export const getPokemonById = async( id: number ): Promise<PokemonDetails> => {
   try {
     const data: SinglePokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${ id }`)
       .then(res => res.json());

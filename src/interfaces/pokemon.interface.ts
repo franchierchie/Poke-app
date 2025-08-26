@@ -1,6 +1,7 @@
+import { GameIndex } from "./";
 
 export interface SimplePokemon {
-  id: string;
+  id: number;
   name: string;
   types: string[];
   sprite: string;
@@ -21,7 +22,7 @@ export interface SinglePokemon {
   forms:                    Species[];
   game_indices:             GameIndex[];
   height:                   number;
-  held_items:               any[];
+  held_items:               HeldItems[];
   id:                       number;
   is_default:               boolean;
   location_area_encounters: string;
@@ -29,12 +30,27 @@ export interface SinglePokemon {
   name:                     string;
   order:                    number;
   past_abilities:           PastAbility[];
-  past_types:               any[];
+  past_types:               PastType[];
   species:                  Species;
   sprites:                  Sprites;
   stats:                    Stat[];
   types:                    Type[];
   weight:                   number;
+}
+
+export interface HeldItems {
+  item: Species;
+  version_details: VersionDetail[];
+}
+
+export interface VersionDetail {
+  rarity: number;
+  version: Species;
+}
+
+export interface PastType {
+  generation: Species;
+  types: Type[];
 }
 
 export interface Ability {
@@ -51,11 +67,6 @@ export interface Species {
 export interface Cries {
   latest: string;
   legacy: string;
-}
-
-export interface GameIndex {
-  game_index: number;
-  version:    Species;
 }
 
 export interface Move {

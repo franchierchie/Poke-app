@@ -27,3 +27,8 @@ export const getTypeColor = ( typeName: string ) => {
 
   return typeObj ? typeObj.color : '#fff';  // fallback color
 }
+
+// for the border color of PokemonGridItem
+export const getBorderColor = ( types: string[] ): string[] => {
+  return types.map(type => getTypeColor( type ));
+}

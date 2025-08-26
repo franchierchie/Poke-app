@@ -1,6 +1,6 @@
 'use server';
 
-import { DamageRelations, PokemonTypes } from "@/interfaces";
+import { DamageRelations, PokemonTypes, TypeMatchups } from "@/interfaces";
 
 interface PokemonType {
   name: string;
@@ -11,18 +11,23 @@ interface PokemonType {
 const allTypes = ["normal","fire","water","electric","grass","ice","fighting","poison","ground", "flying","psychic","bug","rock","ghost","dragon","dark","steel","fairy"];
 
 
-export const getPokemonTypeMatchups = async( types: PokemonTypes[] ) => {
+export const getPokemonTypeMatchups = async( types: PokemonTypes[] ): Promise<TypeMatchups> => {
   try {
     const multipliers: Record<string, number> = {};
-    allTypes.forEach(t => multipliers[t] = 1);
+    allTypes.forEach((t) => (multipliers[t] = 1));
 
     // fetch types
     const data = await Promise.all(
-      types.map(async(t) => await fetch(`https://pokeapi.co/api/v2/type/${ t.type.name }`)
-        .then(res => res.json())
-      )
+      types.map(
+        async(t) => {
+          const res: { damage_relations: DamageRelations } = await fetch(`https://pokeapi.co/api/v2/type/${ t.type.name }`)
+            .then(res => res.json());
+
+            return res;
+        })
     );
 
+    // calculate defensive multipliers
     data.forEach(res => {
       const rel: DamageRelations = res.damage_relations;
 
@@ -53,6 +58,6 @@ export const getPokemonTypeMatchups = async( types: PokemonTypes[] ) => {
     
   } catch (error) {
     console.log( error );
-    throw new Error('There was an error fetching the Pokemon.');
+    throw new Error('There was an error fetching type matchups.');
   }
 }
