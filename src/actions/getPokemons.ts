@@ -2,14 +2,18 @@
 
 import { PokemonsResponse, PokemonTypes, SimplePokemon, SinglePokemon } from "@/interfaces";
 
+const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 5000);
+
 export const getPokemons = async( limit = 20, offset = 0 ):Promise<SimplePokemon[]> => {
+
   try {
     const data: PokemonsResponse = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${ limit }&offset=${ offset }`)
       .then(res => res.json());
 
     const pokemons: SimplePokemon[] = await Promise.all(
       data.results.map(async(pokemon) => {
-        const { id, name, types, sprites }: SinglePokemon = await fetch( pokemon.url ).then(res => res.json());
+        const { id, name, types, sprites }: SinglePokemon = await fetch( pokemon.url, { signal: controller.signal } ).then(res => res.json());
 
         return {
           id: id,
@@ -25,5 +29,7 @@ export const getPokemons = async( limit = 20, offset = 0 ):Promise<SimplePokemon
   } catch (error) {
     console.log( error );
     throw new Error('There was an error fetching the Pokemons.');
+  } finally {
+    clearTimeout( timeout );
   }
 }
