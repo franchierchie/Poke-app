@@ -1,7 +1,7 @@
 import { Generation, Name } from "./";
 
 export interface PokemonAbilities {
-  effect_changes:      any[];
+  effect_changes:      EffectChange[];
   effect_entries:      EffectEntry[];
   flavor_text_entries: FlavorTextEntry[];
   generation:          Generation;
@@ -11,6 +11,12 @@ export interface PokemonAbilities {
   names:               Name[];
   pokemon:             Pokemon[];
 }
+
+export interface EffectChange {
+  effect_entries: EffectEntry[];
+  version_group: { name: string; url: string; };
+}
+
 
 export interface EffectEntry {
   effect:       string;

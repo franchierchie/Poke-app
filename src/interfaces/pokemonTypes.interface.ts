@@ -20,7 +20,7 @@ export interface DamageRelations {
   half_damage_from:   Generation[];
   half_damage_to:     Generation[];
   no_damage_from:     Generation[];
-  no_damage_to:       any[];
+  no_damage_to:       Generation[];
 }
 
 interface PastDamageRelation {

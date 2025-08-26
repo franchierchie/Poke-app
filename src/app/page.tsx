@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { PokemonGrid } from "@/components";

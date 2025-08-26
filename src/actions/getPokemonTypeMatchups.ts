@@ -44,11 +44,11 @@ export const getPokemonTypeMatchups = async( types: PokemonTypes[] ): Promise<Ty
     // classify by multipliers
     const weakAgainst = Object.entries(multipliers)
       .filter(([_, mult]) => mult > 1)
-      .map(([t]) => t);
+      .map(([type]) => type);
 
     const resistantAgainst = Object.entries(multipliers)
       .filter(([_, mult]) => mult > 0 && mult < 1)
-      .map(([t]) => t);
+      .map(([type]) => type);
 
     return {
       strongAgainst,
