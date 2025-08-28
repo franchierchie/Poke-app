@@ -28,11 +28,11 @@ export const PokemonGridItem = ({ pokemon }: Props) => {
       >
         <Image
           src={ pokemon.sprite }
-          alt="example image"
+          alt={`An image of ${pokemon.name}`}
           width={ 96 }
           height={ 96 }
           style={{objectFit: "contain"}}
-          priority
+          loading="lazy"
         />
 
         <div className="text-center">
