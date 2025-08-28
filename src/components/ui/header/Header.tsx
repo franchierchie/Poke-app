@@ -8,7 +8,13 @@ export const Header = () => {
         className="flex justify-center items-center gap-2"
         href="/"
       >
-        <Image className="w-10" src="/poke-ball.svg" alt="pokeball icon" />
+        <Image
+          src="/poke-ball.svg"
+          alt="pokeball icon"
+          width={ 30 }
+          height={ 30 }
+          className="w-10 h-auto object-contain"
+        />
         <p className="text-5xl font-extrabold">Poke</p>
       </Link>
     </nav>

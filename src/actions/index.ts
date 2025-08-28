@@ -4,3 +4,4 @@ export * from './getPokemons';
 export * from './getPokemonById';
 export * from './getPokemonTypeMatchups';
 export * from './getPokemonAbilities';
+export * from './getPokemonsBySearch';
